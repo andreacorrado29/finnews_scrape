@@ -1,0 +1,26 @@
+{
+    "id": "D0E65ACA",
+    "path": "~/Dropbox/r_FINSCRAPE/master/financial_scrape.R",
+    "project_path": "financial_scrape.R",
+    "type": "r_source",
+    "hash": "3609866939",
+    "contents": "",
+    "dirty": false,
+    "created": 1625080322780.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "161,2",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1630493049,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1630493049786,
+    "read_only": false,
+    "read_only_alternatives": []
+}

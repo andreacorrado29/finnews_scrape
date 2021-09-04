@@ -1,0 +1,90 @@
+# functions
+
+# warning('deploy auxilary function to allow for different sentiment')
+
+news_retreive <- function(url, node_type){
+  suppressMessages(require(rvest))
+  link <- read_html(url) # query the link 
+  html_nodes_extract <- html_nodes(link, node_type) # extract data
+  mytitle_raw <- html_text(html_nodes_extract) # convert data into text
+  mytitle_raw
+}
+
+text_prepro <- function(x, min.length = 40, max.length = 100){
+  
+  # browser()
+  
+  mytitle <- trimws(gsub("[^A-Za-z0-9, ]", "", x)) # clean text
+  mytitle <- mytitle[sapply(mytitle, function(x) nchar(gsub(' ', '', x)) > min.length)] # keep only long titles
+  mytitle <- mytitle[sapply(mytitle, function(x) nchar(gsub(' ', '', x)) < max.length)] # keep only long titles
+  mytitle <- gsub(' +', ' ', mytitle) # substitute multiple blank space
+  mytitle <- tolower(mytitle) # lower case
+  mytitle <- unique(mytitle) # remove duplicates
+  mytitle
+}
+
+get_sentiment <- function(x, language = 'english'){
+  
+  suppressMessages(require(syuzhet))
+  suppressMessages(require(SentimentAnalysis))
+  
+  # sentiment preparation ------------------------------------------------------
+  corpus <- Corpus(VectorSource(x)) # convert into corpus obje
+  corpus <- tm_map(corpus, removePunctuation)
+  corpus  <- tm_map(corpus, content_transformer(tolower))
+  cleanset <- tm_map(corpus, removeWords, stopwords(language))
+  cleanset <- tm_map(cleanset, stemDocument) # word stemming: reduce to root form
+  cleanset <- tm_map(cleanset, stripWhitespace)
+  
+  # words sentiment -----------------------------------------------------------
+  my_cleantitle <- unlist(cleanset)[which(names(unlist(cleanset)) != 'meta.language')]
+  # result <- get_nrc_sentiment(my_cleantitle)
+  # result$choice <- result$positive - result$negative
+  result <- analyzeSentiment(my_cleantitle)
+  #list(title = x, sentiment = result[,c('SentimentGI', 'SentimentQDAP' )])
+  data.frame(time = Sys.Date(),
+             title = x,
+             sentiment = result[,c('SentimentGI', 'SentimentQDAP' )])
+}
+
+# daily aggregation -----------------------------------------------------------
+
+daily_aggr <- function(comp, f, aggr, dest_path = './score/'){
+  
+  c.filename <- paste0(comp, '.csv')
+  i.dat <- read.csv(paste0(path, c.filename))[,-1]
+  if(nrow(i.dat) > 0){ # if there are records in it
+    i.times <- unique(i.dat$time)
+    i.dat.aggr <- 
+      data.frame(
+        i.times,
+        tapply(i.dat[, 3], i.dat[,1], f), # aggregation function
+        tapply(i.dat[, 4], i.dat[,1], f) # aggregation function
+      )[length(i.times):1,] # reverse order
+    names(i.dat.aggr) <- names(i.dat[,-2])
+    i.dat.aggr$mean.sentiment <- apply(i.dat.aggr[,c(2,3)], 1, aggr) # sentiment aggr
+    write.csv(i.dat.aggr, paste0(dest_path, c.filename))
+  } else {
+    stop(cat('\n no records found for', comp, '\n'))
+  }
+  invisible(i.dat.aggr)
+}
+
+# sentiment plot function ------------------------------------------------------
+
+daily_plot <- function(i.dat, i, ylim, ...){
+  
+  i.times <- sort(i.dat$time, decreasing = TRUE)
+  l.times <- length(i.times)
+  if(i == 1){
+    par(las = 2 )
+    plot(1:l.times, i.dat$mean.sentiment, pch = 19, type = 'b',
+         xaxt = 'n', xlab = 'time', ylab = 'sentiment', ylim = ylim, ...)
+    axis(1, at = 1:l.times, labels = substr(i.times, 6, 10)) 
+    title('sentiment by keyword')
+  } else {
+    lines(1:l.times, i.dat$mean.sentiment, pch = 19, type = 'b', col = i)
+  }
+}
+
+

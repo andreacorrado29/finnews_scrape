@@ -1,0 +1,33 @@
+name,
+"apple, tim cook",https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=1593631055&period2=1625167055&interval=1d&events=history&includeAdjustedClose=true
+amazon,https://query1.finance.yahoo.com/v7/finance/download/AMZN?period1=1593631082&period2=1625167082&interval=1d&events=history&includeAdjustedClose=true
+netflix,https://query1.finance.yahoo.com/v7/finance/download/NFLX?period1=1593625468&period2=1625161468&interval=1d&events=history&includeAdjustedClose=true
+"facebook, zuckerberg",https://query1.finance.yahoo.com/v7/finance/download/FB?period1=1593631124&period2=1625167124&interval=1d&events=history&includeAdjustedClose=true
+google,https://query1.finance.yahoo.com/v7/finance/download/GOOG?period1=1593631155&period2=1625167155&interval=1d&events=history&includeAdjustedClose=true
+tech,
+bank,
+"crypto, bitcoin, dogecoin",
+pharma,
+fedex,
+"tesla, musk",https://query1.finance.yahoo.com/v7/finance/download/TSLA?period1=1593631185&period2=1625167185&interval=1d&events=history&includeAdjustedClose=true
+nvidia,https://query1.finance.yahoo.com/v7/finance/download/NVDA?period1=1593631208&period2=1625167208&interval=1d&events=history&includeAdjustedClose=true
+natera,https://query1.finance.yahoo.com/v7/finance/download/NTRA?period1=1593631229&period2=1625167229&interval=1d&events=history&includeAdjustedClose=true
+nike,https://query1.finance.yahoo.com/v7/finance/download/NKE?period1=1593631245&period2=1625167245&interval=1d&events=history&includeAdjustedClose=true
+alibaba,
+baidu,
+freshpet,
+roku,
+jinkosolar,
+sunpower,
+skillz,
+quantumscape,
+microvision,
+ambev,
+contextlogic,
+"spacex, musk",
+"oil, petroleum",
+green energy,
+biontech,
+"microsoft, windows",https://query1.finance.yahoo.com/v7/finance/download/MSFT?period1=1593712607&period2=1625248607&interval=1d&events=history&includeAdjustedClose=true
+"intel ",https://query1.finance.yahoo.com/v7/finance/download/INTC?period1=1593712652&period2=1625248652&interval=1d&events=history&includeAdjustedClose=true
+"amd,radeon",https://query1.finance.yahoo.com/v7/finance/download/AMD?period1=1593712718&period2=1625248718&interval=1d&events=history&includeAdjustedClose=true
