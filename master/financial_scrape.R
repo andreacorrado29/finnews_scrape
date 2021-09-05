@@ -160,7 +160,12 @@ for(i in 1:length(my_news)){
     }
     
   } else { # file doesn't exist, create
-    write.csv(my_news[[i]], paste0(path, filename[i])) # create new file
+    write.csv(
+      data.frame(
+          time = rep(Sys.Date(), NROW(my_news[[i]])), 
+          title = my_news[[i]]
+          ),
+      paste0(path, filename[i])) # create new file
   }
 
   setTxtProgressBar(pb, i) # update progress bar
